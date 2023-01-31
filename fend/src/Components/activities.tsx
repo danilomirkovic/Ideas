@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link } from "react-router-dom";
+import '../activitiesStyle.css';
+import Navbar from './navbar';
 
 export default function Activities() {
     const [activityData, setActivityData] = useState("");
@@ -36,17 +38,24 @@ export default function Activities() {
     return (
 
         <div>
+             <Navbar />
             {err && <h2>{err}</h2>}
-
-            <button onClick={handleClick}>Fetch data</button>
+            <h1 className='h1Main'>Clicking on the button will give you some suggestion on what you can do</h1>
+            <button className='button' onClick={handleClick}>Get Inspired</button>
 
             {isLoading && <h2>Loading...</h2>}
 
-            <div>
-                <h2>{activityData}</h2>
-                <h2>Price: {priceData}</h2>
-                <h2>Participants: {participantsData}</h2>
-                <h2>Category: {typeData}</h2>
+            <div className='mainDiv'>
+                <h2 className='children'>Activity: {activityData}</h2>
+                {/* <h2 className='children'>Price: {priceData}</h2> */}
+                <h2 className='children'>Participants: {participantsData}</h2>
+                {/* <select>
+                    <option value='busywork'>Filter</option>
+                    <option value='social'>Social</option>
+                    <option value='charity'>Charity</option>
+                    <option value='recreational'>Recreational</option>
+                    <option value='education'>Education</option>
+                </select> */}
             </div>
 
         </div>
