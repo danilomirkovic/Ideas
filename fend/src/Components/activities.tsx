@@ -44,9 +44,9 @@ export default function Activities() {
 
             <div>
                 <h2>{activityData}</h2>
-                <h2>{priceData}</h2>
-                <h2>{participantsData}</h2>
-                <h2>{typeData}</h2>
+                <h2>Price: {priceData}</h2>
+                <h2>Participants: {participantsData}</h2>
+                <h2>Category: {typeData}</h2>
             </div>
 
         </div>
