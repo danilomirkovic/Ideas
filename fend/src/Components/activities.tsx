@@ -5,9 +5,9 @@ import Select from "react-select";
 
 export default function Activities() {
     const [activityData, setActivityData] = useState("");
-    // const [typeData, setTypeData] = useState("");
+    
     const [participantsData, setparticipantsData] = useState('');
-    const [priceData, setPriceData] = useState();
+    // const [priceData, setPriceData] = useState(false);
     const [isLoading, setIsLoading] = useState(false);
     const [err, setErr] = useState('');
     const [selected, setSelected] = useState(null);
@@ -15,9 +15,12 @@ export default function Activities() {
     const handleChange = (selectedOption: any) => {
         setSelected(selectedOption);
     }
+    // const handlePrice = () => {
+    //     setPriceData((current) => !current);
+    // };
 
     const options = [
-        { value: "", label: "" },
+        
         { value: "busywork", label: "Busywork" },
         { value: "social", label: "Social" },
         { value: "charity", label: "Charity" },
@@ -37,7 +40,7 @@ export default function Activities() {
                 const result = await response.json();
                 setActivityData(result.activity);
                 setparticipantsData(result.participants);
-                setPriceData(result.price);
+                // setPriceData(result.price);
                 setSelected(result.type);
             }
 
@@ -61,7 +64,7 @@ export default function Activities() {
 
             <div className='mainDiv'>
                 <h2 className='children'>Activity: {activityData}</h2>
-                {/* <h2 className='children'>Price: {priceData}</h2> */}
+                {/* <input type="range" min="0" max="1" value="0" onChange={handlePrice} /> */}
                 <h2 className='children'>Participants: {participantsData}</h2>
                 <Select className='select' options={options} onChange={handleChange} />
             </div>
