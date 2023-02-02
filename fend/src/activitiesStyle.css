@@ -3,24 +3,26 @@ body{
     margin: 0;
     padding: 0;
 }
-.mainDiv{
-    /* border: 1px solid black; */
-}
 .h1Main{
     letter-spacing: 0.1rem;
     text-align: center;
     font-family:'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
-    font-weight: 500;
+    font-weight: 500;   
 }
 .button{
-    border: 1px solid black;
+    border: 2px solid rgb(91, 91, 242);
     margin: 10px 180px;
     border-radius: 8px;
-    padding: 6px;
+    padding: 7px;
     cursor: pointer;
+    background-color: white;
 }
 .children{
     margin-left: 180px;
     font-family: 'Trebuchet MS', 'Lucida Sans Unicode', 'Lucida Grande', 'Lucida Sans', Arial, sans-serif;
     font-weight: 500;
+}
+.select{
+    width: 200px;
+    margin-left: 180px;
 }

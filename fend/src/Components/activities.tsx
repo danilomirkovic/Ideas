@@ -1,35 +1,49 @@
-import React, { useState, useEffect } from 'react';
-import { Link } from "react-router-dom";
+import React, { useState } from 'react';
 import '../activitiesStyle.css';
 import Navbar from './navbar';
+import Select from "react-select";
 
 export default function Activities() {
     const [activityData, setActivityData] = useState("");
-    const [typeData, setTypeData] = useState("");
+    // const [typeData, setTypeData] = useState("");
     const [participantsData, setparticipantsData] = useState('');
     const [priceData, setPriceData] = useState();
     const [isLoading, setIsLoading] = useState(false);
     const [err, setErr] = useState('');
+    const [selected, setSelected] = useState(null);
 
+    const handleChange = (selectedOption: any) => {
+        setSelected(selectedOption);
+    }
+
+    const options = [
+        { value: "", label: "" },
+        { value: "busywork", label: "Busywork" },
+        { value: "social", label: "Social" },
+        { value: "charity", label: "Charity" },
+        { value: "education", label: "Education" },
+        { value: "recreational", label: "Recreational" }
+    ];
 
     const handleClick = async () => {
         setIsLoading(true);
 
         try {
-            const response = await fetch('http://www.boredapi.com/api/activity/');
-
-            if (!response.ok) {
-                throw new Error(`Error! status: ${response.status}`);
+            /* @ts-ignore */
+            if (selected.value != null) {
+                /* @ts-ignore */
+                const bla = "https://www.boredapi.com/api/activity" + "?type=" + selected.value;
+                const response = await fetch(bla);
+                const result = await response.json();
+                setActivityData(result.activity);
+                setparticipantsData(result.participants);
+                setPriceData(result.price);
+                setSelected(result.type);
             }
-            const result = await response.json();
 
-            setActivityData(result.activity);
-            setparticipantsData(result.participants);
-            setPriceData(result.price);
-            setTypeData(result.type);
         } catch (err) {
             /* @ts-ignore */
-            setErr(err.message);
+            setErr("first select type of activity you would like to try");
         } finally {
             setIsLoading(false);
         }
@@ -38,9 +52,9 @@ export default function Activities() {
     return (
 
         <div>
-             <Navbar />
+            <Navbar />
             {err && <h2>{err}</h2>}
-            <h1 className='h1Main'>Clicking on the button will give you some suggestion on what you can do</h1>
+            <h1 className='h1Main'>Clicking on this button will give you some innuendo</h1>
             <button className='button' onClick={handleClick}>Get Inspired</button>
 
             {isLoading && <h2>Loading...</h2>}
@@ -49,13 +63,7 @@ export default function Activities() {
                 <h2 className='children'>Activity: {activityData}</h2>
                 {/* <h2 className='children'>Price: {priceData}</h2> */}
                 <h2 className='children'>Participants: {participantsData}</h2>
-                {/* <select>
-                    <option value='busywork'>Filter</option>
-                    <option value='social'>Social</option>
-                    <option value='charity'>Charity</option>
-                    <option value='recreational'>Recreational</option>
-                    <option value='education'>Education</option>
-                </select> */}
+                <Select className='select' options={options} onChange={handleChange} />
             </div>
 
         </div>
